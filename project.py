@@ -45,7 +45,7 @@ def infix_to_postfix(userin):
         elif item=='(':
             mystack.push(item)
 
-        elif item.isdigit():
+        elif item!='+' and item!='-' and item!='*' and item!='/' and item!='(' and item!=')' and item!='^':
             answer.append(float(item))
 
         else:
@@ -58,8 +58,46 @@ def infix_to_postfix(userin):
                 mystack.push(item)
     while not mystack.is_empty():
         answer.append(mystack.pop())
-
     print(answer)
-userin='1+2*(3/(4+5))/6'
-infix_to_postfix(userin)
+
+def separate(userin):
+    negetivs=0
+    list_userin = []
+
+
+    for item in userin:
+        list_userin.append(item)
+
+
+    for item in range(0,len(list_userin)):
+        try:
+            if list_userin[item]=='-' and list_userin[item+1]=='(':
+                negetivs +=1
+                print(list_userin.pop(item))
+                
+        except:
+            pass
+
+        try:
+            if list_userin[item].isdigit() and list_userin[item+1]=='.' and list_userin[item+2].isdigit():
+                string=str(list_userin[item]+list_userin[item+1]+list_userin[item+2])
+        
+                list_userin.pop(item)
+                list_userin.pop(item)
+                list_userin.pop(item)
+
+                list_userin.insert(item ,string )
+                item-=1
+        except:
+            pass
+
+
+    return list_userin ,negetivs
+
+
+userin='6*-(2+3)'
+a,b=separate( userin)
+print(a)
+infix_to_postfix(a)
+
 
