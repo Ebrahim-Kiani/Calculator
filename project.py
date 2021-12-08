@@ -41,16 +41,16 @@ def Error(userin):
 
 
 def prioritize(a , b):
-    if (a=='/' or a=='*') and (b=='/' or b=='*'):
+    if (a=='^') and (b=='^'):
+        return False
+    elif (a=='^') and (b=='*' or b=='/' or b=='+' or b=='-'):
+        return True
+    elif (a=='/' or a=='*') and (b=='/' or b=='*'):
         return False
     elif (a=='/' or a=='*') and (b=='+' or b=='-'):
         return True
-    elif (a=='/' or a=='*') and (b=='^'):
-        return True
     elif (a=='+' or a=='-') and (b=='+' or b=='-'):
         return False
-    elif (a=='+' or a=='-') and (b=='^'):
-        return True
     else:
         return False
 def infix_to_postfix(userin):
@@ -166,11 +166,11 @@ def calculator(string ,  negetivs):
             return answer
         else:
             return answer*-1
-
-userin='4^2'
+userin=input('Enter mathematical phrase:')
 a,b=separate( userin+',')
-print(a)
-print(Error(userin))
-f=infix_to_postfix(a)
-print(calculator(f,b))
+if not Error(userin):
+    print("error")
+else:
+    f=infix_to_postfix(a)
+    print(calculator(f,b))
 
