@@ -166,11 +166,13 @@ def calculator(string ,  negetivs):
             return answer
         else:
             return answer*-1
-userin=input('Enter mathematical phrase:')
-a,b=separate( userin+',')
-if not Error(userin):
-    print("error")
-else:
-    f=infix_to_postfix(a)
-    print(calculator(f,b))
+
+def CalculateRun(userinput):
+    userinput=userinput
+    a,b=separate( userinput+',')
+    if not Error(userinput):
+        return("error")
+    else:
+        f=infix_to_postfix(a)
+        return(calculator(f,b))
 
